@@ -7,10 +7,46 @@ The intention is to soon document this library in order to allow people to more 
 Another intention with releasing this as open source is to allow collaboration on the Triplet clients. The clients are plugins that allow the Triplet Core library to connect to a multitide of travel planner backends.
 
 Currently there are four clients available
-[triplet-client-vt](https://github.com/toostn/triplet-client-vt) (Västtrafik, SE)
-[triplet-client-skt](https://github.com/toostn/triplet-client-skt) (Skånetrafiken, SE)
-[triplet-client-sl](https://github.com/toostn/triplet-client-sl) (Storstockholms Lokaltrafik, SE)
-[triplet-client-ruter](https://github.com/toostn/triplet-client-no) (Ruter, NO)
+
+- [triplet-client-vt](https://github.com/toostn/triplet-client-vt) (Västtrafik, SE)
+- [triplet-client-skt](https://github.com/toostn/triplet-client-skt) (Skånetrafiken, SE) (Currently unavailable)
+- [triplet-client-sl](https://github.com/toostn/triplet-client-sl) (Storstockholms Lokaltrafik, SE)
+- [triplet-client-ruter](https://github.com/toostn/triplet-client-no) (Ruter, NO)
+
+## Documentation
+
+Basically, for now there is none. The core and clients have just been separated from the main Triplet app and may not be working when combined using npm.
+
+This code *should* set up a basic structure of components and performs a trip search from your current location to Järntorget.
+This will only work within the Västtrafik area.
+
+```
+var vtClientFactory = require('triplet-client-vt');
+var TripsSearch = require('triplet-core/trips-search');
+var NavigatorLocationProvider = require('triplet-core/navigator-location-provider'); // currently not in repo :(
+var LocationService = require('triplet-core/location-service');
+var NearbyStations = require('triplet-core/nearby-stations');
+var StationSearch = require('triplet-core/station-search');
+
+var httpClient = fetch || angular.$http || window.myCustomPromiseBasedHTTPClient;
+var client = vtClientFactory('secretAPIKet', httpClient);
+var locationService = new LocationService(new NavigatorLocationProvider());
+var nearbyStations = new NearbyStations(client, locationService);
+var stationSearch = new StationSearch(client);
+var tripsSearch = new TripsSearch(client, nearbyStations);
+
+stationSearch.queryString = 'Järntorget';
+
+// wait for results (change:results event is currently missing in stationSearch)
+
+tripsSearch.bind('change:results', function(results) {
+  console.log(results);
+});
+
+tripsSearch.to = stationSearch.results[0];
+
+```
+
 
 ## License
 The MIT License (MIT)
