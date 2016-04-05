@@ -19,7 +19,7 @@ exports.parseLocalDate = function parseLocalDate(dateString, timeString) {
   var timeComponents = timeString.split(':');
   return (dateComponents.length !== 3 || timeComponents.length < 2) ?
     null :
-    Date(
+    new Date(
       parseInt(dateComponents[0]),
       parseInt(dateComponents[1] - 1),
       parseInt(dateComponents[2]),
