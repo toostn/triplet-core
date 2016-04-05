@@ -13,12 +13,16 @@ Currently there are four clients available
 - [triplet-client-sl](https://github.com/toostn/triplet-client-sl) (Storstockholms Lokaltrafik, SE)
 - [triplet-client-ruter](https://github.com/toostn/triplet-client-no) (Ruter, NO)
 
+## Status
+
+The code of the core and clients have been running stable in the Triplet app for some time now, however this modularized version is yet not working completely. A working version will soon be released.
+
 ## Documentation
 
 Basically, for now there is none. The core and clients have just been separated from the main Triplet app and may not be working when combined using npm.
 
-This code *should* set up a basic structure of components and performs a trip search from your current location to Järntorget.
-This will only work within the Västtrafik area.
+This code *should* set up a basic structure of components and performs a trip search from your current location to Järntorget. As the location changes and time passes, the trip results will automatically update.
+This will only work within the Västtrafik area, currently the logic that automatically selects client based on location is part of the Triplet app. It will be released as part of triplet-core once it has been untangled from its Angular roots.
 
 ```
 var vtClientFactory = require('triplet-client-vt');
@@ -35,16 +39,14 @@ var nearbyStations = new NearbyStations(client, locationService);
 var stationSearch = new StationSearch(client);
 var tripsSearch = new TripsSearch(client, nearbyStations);
 
-stationSearch.queryString = 'Järntorget';
-
-// wait for results (change:results event is currently missing in stationSearch)
-
+locationService.start();
 tripsSearch.bind('change:results', function(results) {
   console.log(results);
 });
 
+stationSearch.queryString = 'Järntorget';
+// wait for results (change:results event is currently missing in stationSearch)
 tripsSearch.to = stationSearch.results[0];
-
 ```
 
 
