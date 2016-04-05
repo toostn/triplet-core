@@ -1,6 +1,6 @@
 {
   "name": "triplet-core",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Core functionality for Triplet multi-client travel planner",
   "main": "index.js",
   "scripts": {
