@@ -11,7 +11,7 @@ Currently there are four clients available
 - [triplet-client-vt](https://github.com/toostn/triplet-client-vt) (Västtrafik, SE)
 - [triplet-client-skt](https://github.com/toostn/triplet-client-skt) (Skånetrafiken, SE) (Currently unavailable)
 - [triplet-client-sl](https://github.com/toostn/triplet-client-sl) (Storstockholms Lokaltrafik, SE)
-- [triplet-client-ruter](https://github.com/toostn/triplet-client-no) (Ruter, NO)
+- [triplet-client-ruter](https://github.com/toostn/triplet-client-ruter) (Ruter, NO)
 
 ## Status
 
