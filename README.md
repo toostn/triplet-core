@@ -9,13 +9,13 @@ Another intention with releasing this as open source is to allow collaboration o
 Currently there are four clients available
 
 - [triplet-client-vt](https://github.com/toostn/triplet-client-vt) (Västtrafik, SE)
-- [triplet-client-skt](https://github.com/toostn/triplet-client-skt) (Skånetrafiken, SE) (Currently unavailable)
+- [triplet-client-skt](https://github.com/toostn/triplet-client-skt) (Skånetrafiken, SE)
 - [triplet-client-sl](https://github.com/toostn/triplet-client-sl) (Storstockholms Lokaltrafik, SE)
 - [triplet-client-ruter](https://github.com/toostn/triplet-client-ruter) (Ruter, NO)
 
 ## Status
 
-The code of the core and clients have been running stable in the Triplet app for some time now, however this modularized version is yet not working completely. A working version will soon be released.
+The code of the core and clients have been running stable in the Triplet app for some time now, however this modularized version was just assembled, so it might be shaky at times.
 
 ## Documentation
 
