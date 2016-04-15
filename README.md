@@ -21,33 +21,63 @@ The code of the core and clients have been running stable in the Triplet app for
 
 Basically, for now there is none. The core and clients have just been separated from the main Triplet app and may not be working when combined using npm.
 
-This code *should* set up a basic structure of components and performs a trip search from your current location to Järntorget. As the location changes and time passes, the trip results will automatically update.
+This code sets up a basic structure of components and performs a trip search from your current location to Järntorget. As the location changes and time passes, the trip results will automatically update.
 This will only work within the Västtrafik area, currently the logic that automatically selects client based on location is part of the Triplet app. It will be released as part of triplet-core once it has been untangled from its Angular roots.
 
 ```
+// The client plug-in for Västtrafik
 var vtClientFactory = require('triplet-client-vt');
+
+// The trips search engine
 var TripsSearch = require('triplet-core/trips-search');
-var NavigatorLocationProvider = require('triplet-core/navigator-location-provider'); // currently not in repo :(
+
+// Current location provider plugin, this one is using html5 geolocation
+var NavigatorLocationProvider = require('triplet-core/navigator-location-provider');
+
+// Service that generates Location objects from a location provider and also
+// filters unwanted location data
 var LocationService = require('triplet-core/location-service');
+
+// Service that uses the stream of Locations to fetch the current nearby stations
 var NearbyStations = require('triplet-core/nearby-stations');
+
+// Service that accepts a query string and returns a list of Stations / GeoPoints that
+// match that query
 var StationSearch = require('triplet-core/station-search');
 
+// Triplet can use any http client that works with the fetch API, i.e. accepts a config object
+// and returns a Promise.
 var httpClient = fetch || angular.$http || window.myCustomPromiseBasedHTTPClient;
+
+// Join the pieces
 var client = vtClientFactory('secretAPIKet', httpClient);
 var locationService = new LocationService(new NavigatorLocationProvider());
 var nearbyStations = new NearbyStations(client, locationService);
 var stationSearch = new StationSearch(client);
 var tripsSearch = new TripsSearch(client, nearbyStations);
 
+// Start the location service
 locationService.start();
+
+// Whenever there are changes in station search results, set first result
+// as trip destination.
+stationSearch.bind('change:results', function(results) {
+  tripsSearch.to = results[0];
+});
+
+// Whenever the trip ends change, or trip data is updated, log the new suggestions
+// to console.
 tripsSearch.bind('change:results', function(results) {
   console.log(results);
 });
 
 stationSearch.queryString = 'Järntorget';
-// wait for results (change:results event is currently missing in stationSearch)
-tripsSearch.to = stationSearch.results[0];
+
 ```
+
+## Future improvements
+- Clients should expose config and parser functions for each request type, so instead of injecting a http client in constructor and managing the http conneciton, the client is only responsible for creating http request config and parsing the response.
+- Rewrite everything using RxJS.
 
 
 ## License
