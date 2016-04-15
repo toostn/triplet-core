@@ -1,12 +1,16 @@
+var MicroEvent = require('microevent');
+
 function StationSearch(apiClient) {
   this.apiClient = apiClient;
-  this.results = undefined;
+  this._results = undefined;
   this._queryString = '';
   this.searching = false;
   this.resetOnSearch = true;
 }
 
 module.exports = StationSearch;
+
+MicroEvent.mixin(StationSearch);
 
 Object.defineProperty(StationSearch.prototype, 'queryString', {
   get: function get() {
@@ -29,5 +33,15 @@ Object.defineProperty(StationSearch.prototype, 'queryString', {
           }
       });
     }
+  }
+});
+
+Object.defineProperty(StationSearch.prototype, 'results', {
+  get: function get() {
+    return this._results;
+  },
+  set: function set(results) {
+    this._results = results;
+    this.trigger('change:results', results);
   }
 });
