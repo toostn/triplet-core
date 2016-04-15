@@ -15,11 +15,11 @@ Currently there are four clients available
 
 ## Status
 
-The code of the core and clients have been running stable in the Triplet app for some time now, however this modularized version was just assembled, so it might be shaky at times.
+The code of the core and clients have been running stable in the Triplet app for some time now, so should you figure out how to use it, you should be safe using it.
 
 ## Documentation
 
-Basically, for now there is none. The core and clients have just been separated from the main Triplet app and may not be working when combined using npm.
+The code snippet below is all there is for now.
 
 This code sets up a basic structure of components and performs a trip search from your current location to Järntorget. As the location changes and time passes, the trip results will automatically update.
 This will only work within the Västtrafik area, currently the logic that automatically selects client based on location is part of the Triplet app. It will be released as part of triplet-core once it has been untangled from its Angular roots.
@@ -77,7 +77,7 @@ stationSearch.queryString = 'Järntorget';
 
 ## Future improvements
 - Clients should expose config and parser functions for each request type, so instead of injecting a http client in constructor and managing the http conneciton, the client is only responsible for creating http request config and parsing the response.
-- Rewrite everything using RxJS.
+- Rewrite everything using RxJS. The core is mostly a set of streams already, and using RxJS would reduce the amount of code and probably improve the code patterns.
 
 
 ## License
