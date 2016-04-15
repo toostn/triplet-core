@@ -56,7 +56,7 @@ Object.defineProperty(NearbyStations.prototype, 'stations', {
   },
   set: function(stations) {
     this._stations = stations;
-    this.trigger('stationsChanged', stations);
+    this.trigger('change:stations', stations);
   }
 });
 

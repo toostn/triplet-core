@@ -64,7 +64,7 @@ var TripsSearch = function TripsSearch(client, nearbyStations, overrides) {
 
   if (this.nearbyStations) {
     this.nearbyStations.bind(
-      'stationsChanged',
+      'change:stations',
       this._onNearbyStationsChanged.bind(this)
     );
   }
