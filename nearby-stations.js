@@ -9,8 +9,7 @@ var DEFAULTS = {
 var STATES = {
   awaitingLocation: 0,
   requestingStations: 1,
-  tracking: 2,
-  stopped: 3,
+  tracking: 2
 };
 
 var NearbyStations = function NearbyStations(apiClient, locationService) {
@@ -41,14 +40,6 @@ module.exports = NearbyStations;
 
 MicroEvent.mixin(NearbyStations);
 NearbyStations.States = STATES;
-
-NearbyStations.prototype.stop = function stop() {
-  this.state = STATES.stopped;
-};
-
-NearbyStations.prototype.start = function start() {
-  this.state = STATES.awaitingLocation;
-};
 
 Object.defineProperty(NearbyStations.prototype, 'stations', {
   get: function() {
