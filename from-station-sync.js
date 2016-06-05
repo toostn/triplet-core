@@ -18,7 +18,7 @@ function FromStationSync(nearbyStations, overrides, tripsSearch) {
     nearbyStations.bind('change:stations', this.nearbyChanged.bind(this));
   }
   if (tripsSearch) {
-    tripsSearch.bind('change:to', this.fromChanged.bind(this));
+    tripsSearch.bind('change:from', this.fromChanged.bind(this));
   }
 }
 
