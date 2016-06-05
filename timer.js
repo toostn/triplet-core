@@ -1,4 +1,4 @@
-var MicroEvent = requre('microevent');
+var MicroEvent = require('microevent');
 
 function Timer(interval) {
   this.interval = interval;
@@ -19,7 +19,7 @@ Timer.prototype.set = function set(interval) {
 
 Timer.prototype.start = function start() {
   if (this.running) return;
-  this._timeout = setTimeout(this.interval, this._trigger.bind(this));
+  this._timeout = setTimeout(this._trigger.bind(this), this.interval);
   this.running = true;
   return this;
 };
