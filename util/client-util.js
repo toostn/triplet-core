@@ -1,25 +1,25 @@
 /* globals escape */
 
-exports.forceArray = function(obj) {
+exports.forceArray = function (obj) {
   if (obj instanceof Array) {
-    return obj;
+    return obj
   } else if (obj === null || obj === undefined) {
-    return [];
+    return []
   }
-  return [obj];
-};
+  return [obj]
+}
 
-exports.dtString = function dtString(number) {
-  return ((number < 10) ? '0' : '') + number;
-};
+exports.dtString = function dtString (number) {
+  return ((number < 10) ? '0' : '') + number
+}
 
-exports.parseLocalDate = function parseLocalDate(dateString, timeString) {
-  if (!dateString || !timeString) { return null; }
-  var dateComponents = dateString.split('-');
-  var timeComponents = timeString.split(':');
-  return (dateComponents.length !== 3 || timeComponents.length < 2) ?
-    null :
-    new Date(
+exports.parseLocalDate = function parseLocalDate (dateString, timeString) {
+  if (!dateString || !timeString) return null
+  var dateComponents = dateString.split('-')
+  var timeComponents = timeString.split(':')
+  return (dateComponents.length !== 3 || timeComponents.length < 2)
+    ? null
+    : new Date(
       parseInt(dateComponents[0]),
       parseInt(dateComponents[1] - 1),
       parseInt(dateComponents[2]),
@@ -27,15 +27,15 @@ exports.parseLocalDate = function parseLocalDate(dateString, timeString) {
       parseInt(timeComponents[1]),
       parseInt(timeComponents[2] || 0),
       0
-    );
-};
+    )
+}
 
-exports.fixEncodingIssues = function fixEncodingIssues(string) {
-  var decodedString;
+exports.fixEncodingIssues = function fixEncodingIssues (string) {
+  var decodedString
   try {
-    decodedString = decodeURIComponent(escape(string));
+    decodedString = decodeURIComponent(escape(string))
   } catch (e) {
-    decodedString = string;
+    decodedString = string
   }
-  return decodedString;
-};
+  return decodedString
+}
