@@ -4,7 +4,7 @@
   "description": "Core functionality for Triplet multi-client travel planner",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "standard"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,8 @@
   "homepage": "https://github.com/toostn/triplet-core#readme",
   "dependencies": {
     "microevent": "^1.0.0"
+  },
+  "devDependencies": {
+    "standard": "^7.1.2"
   }
 }
