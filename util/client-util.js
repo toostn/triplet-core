@@ -9,11 +9,11 @@ exports.forceArray = function (obj) {
   return [obj]
 }
 
-exports.dtString = function dtString (number) {
+exports.dtString = function (number) {
   return ((number < 10) ? '0' : '') + number
 }
 
-exports.parseLocalDate = function parseLocalDate (dateString, timeString) {
+exports.parseLocalDate = function (dateString, timeString) {
   if (!dateString || !timeString) return null
   var dateComponents = dateString.split('-')
   var timeComponents = timeString.split(':')
@@ -30,7 +30,7 @@ exports.parseLocalDate = function parseLocalDate (dateString, timeString) {
     )
 }
 
-exports.fixEncodingIssues = function fixEncodingIssues (string) {
+exports.fixEncodingIssues = function (string) {
   var decodedString
   try {
     decodedString = decodeURIComponent(escape(string))

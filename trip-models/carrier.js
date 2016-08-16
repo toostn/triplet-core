@@ -26,7 +26,7 @@ Carrier.prototype.equals = function (carrier) {
   this.line.equals(carrier.line))
 }
 
-Carrier.prototype.toJSON = function toJSON () {
+Carrier.prototype.toJSON = function () {
   return {
     _tplType: 'Carrier',
     name: this.name,

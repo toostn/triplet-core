@@ -21,19 +21,19 @@ Object.defineProperty(Client.prototype, 'supports', {
   get: function () { return this.config.supports || {} }
 })
 
-Client.prototype.getStations = function getStations (query) {
+Client.prototype.getStations = function (query) {
   return this._request('stations', query)
 }
 
-Client.prototype.getTrips = function getTrips (query) {
+Client.prototype.getTrips = function (query) {
   return this._request('trips', query)
 }
 
-Client.prototype.getNearbyStations = function getNearbyStations (query) {
+Client.prototype.getNearbyStations = function (query) {
   return this._request('nearbyStations', query)
 }
 
-Client.prototype._request = function _request (endpoint, query) {
+Client.prototype._request = function (endpoint, query) {
   var config = this.config
   return this.http({
     method: 'GET',

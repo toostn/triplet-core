@@ -11,13 +11,13 @@ function Trip (data) {
 }
 
 Object.defineProperty(Trip.prototype, 'departureDate', {
-  get: function departureDate () {
+  get: function () {
     return this.legs[0].from.date
   }
 })
 
 Object.defineProperty(Trip.prototype, 'nonWalkDepartureDate', {
-  get: function departureDate () {
+  get: function () {
     for (var i = 0, l = this.legs.length; i < l; i++) {
       var leg = this.legs[i]
 
@@ -31,19 +31,19 @@ Object.defineProperty(Trip.prototype, 'nonWalkDepartureDate', {
 })
 
 Object.defineProperty(Trip.prototype, 'arrivalDate', {
-  get: function arrivalDate () {
+  get: function () {
     return this.legs[this.legs.length - 1].to.date
   }
 })
 
 Object.defineProperty(Trip.prototype, 'duration', {
-  get: function duration () {
+  get: function () {
     return this.arrivalDate.getTime() - this.departureDate.getTime()
   }
 })
 
 Object.defineProperty(Trip.prototype, 'waitingTime', {
-  get: function waitingTime () {
+  get: function () {
     if (this._waitingTime === undefined) {
       this._waitingTime = 0
 
@@ -80,7 +80,7 @@ Trip.prototype.equals = function (trip) {
   return true
 }
 
-Trip.prototype.toJSON = function toJSON () {
+Trip.prototype.toJSON = function () {
   return {
     _tplType: 'Trip',
     legs: this.legs,

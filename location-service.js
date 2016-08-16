@@ -12,7 +12,7 @@ var STATES = {
 var ACCURATE_MAX = 100
 var LOCATION_MAX_AGE = 10000
 
-var LocationService = function LocationService (provider) {
+function LocationService (provider) {
   this.provider = provider
   this._location = undefined
   this._state = STATES.stopped
@@ -25,7 +25,7 @@ MicroEvent.mixin(LocationService)
 LocationService.States = STATES
 
 Object.defineProperty(LocationService.prototype, 'location', {
-  get: function location () {
+  get: function () {
     return this._location
   },
   set: function (location) {
@@ -45,7 +45,7 @@ Object.defineProperty(LocationService.prototype, 'location', {
 })
 
 Object.defineProperty(LocationService.prototype, 'state', {
-  get: function state () {
+  get: function () {
     return this._state
   },
   set: function (state) {
@@ -58,7 +58,7 @@ Object.defineProperty(LocationService.prototype, 'state', {
   }
 })
 
-LocationService.prototype.start = function start () {
+LocationService.prototype.start = function () {
   this.state = STATES.acquiring
   this.provider.start(
     this._onLocation.bind(this),
@@ -66,23 +66,23 @@ LocationService.prototype.start = function start () {
   )
 }
 
-LocationService.prototype.pause = function pause () {
+LocationService.prototype.pause = function () {
   this.provider.stop()
   this._location = undefined
   this._state = STATES.stopped
 }
 
-LocationService.prototype._onLocation = function _onLocation (location) {
+LocationService.prototype._onLocation = function (location) {
   if (this._shouldSetLocation(location)) {
     this.location = location
   }
 }
 
-LocationService.prototype._onError = function _onError (error) {
+LocationService.prototype._onError = function (error) {
   this.state = (error.code === 1) ? STATES.denied : STATES.unavailable
 }
 
-LocationService.prototype._shouldSetLocation = function _shouldSetLocation (loc) {
+LocationService.prototype._shouldSetLocation = function (loc) {
   return (loc.timestamp >= Date.now() - LOCATION_MAX_AGE &&
   (!this.location || (loc.accuracy <= this.location.accuracy ||
   GeoUtil.distance(this.location, loc) > loc.accuracy)))

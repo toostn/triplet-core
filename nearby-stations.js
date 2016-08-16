@@ -51,7 +51,7 @@ Object.defineProperty(NearbyStations.prototype, 'stations', {
   }
 })
 
-NearbyStations.prototype.onLocationChanged = function onLocationChanged (location) {
+NearbyStations.prototype.onLocationChanged = function (location) {
   // Fetch new stations from client if needed,
   // otherwise just re-sort current stations
   if (this.shouldFetch(location) === true) {
@@ -86,7 +86,7 @@ NearbyStations.prototype.onLocationChanged = function onLocationChanged (locatio
   }
 }
 
-NearbyStations.prototype.isAmongNearby = function isAmongNearby (station) {
+NearbyStations.prototype.isAmongNearby = function (station) {
   if (!this.stations) return false
   for (var i = 0, l = this.stations.length; i < l; i++) {
     if (this.stations[i].equals(station)) {
@@ -106,7 +106,7 @@ NearbyStations.prototype.shouldFetch = function (location) {
   (distance > this.updateMinDistance))
 }
 
-NearbyStations.prototype._sortNearby = function sortNearby (a, b) {
+NearbyStations.prototype._sortNearby = function (a, b) {
   var distA = GeoUtil.distance(this.locationService.location, a.location)
   var distB = GeoUtil.distance(this.locationService.location, b.location)
   return distA - distB

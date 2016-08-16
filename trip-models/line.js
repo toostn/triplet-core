@@ -14,7 +14,7 @@ Line.prototype.equals = function (line) {
   return (line === this) || (line.number === this.number)
 }
 
-Line.prototype.toJSON = function toJSON () {
+Line.prototype.toJSON = function () {
   return {
     _tplType: 'Line',
     number: this.number,

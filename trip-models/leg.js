@@ -28,7 +28,7 @@ Leg.prototype.equals = function (leg) {
   this.to.equals(leg.to))
 }
 
-Leg.prototype.toJSON = function toJSON () {
+Leg.prototype.toJSON = function () {
   return {
     _tplType: 'Leg',
     from: (this.from instanceof LegStop) ? this.from.toJSON() : null,

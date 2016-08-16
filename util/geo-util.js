@@ -1,6 +1,6 @@
 var DEG_TO_RAD = Math.PI / 180
 
-exports.distance = function distance (point1, point2) {
+exports.distance = function (point1, point2) {
   if (point1 === null || point1 === undefined ||
     point2 === null || point2 === undefined) return 0
 

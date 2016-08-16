@@ -20,7 +20,7 @@ function LegStop (data) {
 }
 
 Object.defineProperty(LegStop.prototype, 'date', {
-  get: function date () {
+  get: function () {
     return this.realTimeDate || this.plannedDate
   }
 })
@@ -32,7 +32,7 @@ LegStop.prototype.equals = function (legStop) {
   this.point.equals(legStop.point))
 }
 
-LegStop.prototype.toJSON = function toJSON () {
+LegStop.prototype.toJSON = function () {
   return {
     _tplType: 'LegStop',
     point: (this.point instanceof GeoPoint) ? this.point.toJSON() : null,

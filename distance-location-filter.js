@@ -15,7 +15,7 @@ MicroEvent.mixin(DistanceLocationFilter)
 
 module.exports = DistanceLocationFilter
 
-DistanceLocationFilter.prototype._onLocation = function _onLocation (location) {
+DistanceLocationFilter.prototype._onLocation = function (location) {
   if (this.lastLocation &&
       GeoUtil.distance(this.lastLocation, location) < this.distance) { return }
 

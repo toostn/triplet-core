@@ -11,20 +11,20 @@ module.exports = Timer
 
 MicroEvent.mixin(Timer)
 
-Timer.prototype.set = function set (interval) {
+Timer.prototype.set = function (interval) {
   if (this.running) this.stop()
   this.interval = interval
   return this
 }
 
-Timer.prototype.start = function start () {
+Timer.prototype.start = function () {
   if (this.running) return
   this._timeout = setTimeout(this._trigger.bind(this), this.interval)
   this.running = true
   return this
 }
 
-Timer.prototype.stop = function stop () {
+Timer.prototype.stop = function () {
   if (!this.running) return
   clearTimeout(this._timeout)
   this._timeout = null
@@ -32,7 +32,7 @@ Timer.prototype.stop = function stop () {
   return this
 }
 
-Timer.prototype._trigger = function _trigger () {
+Timer.prototype._trigger = function () {
   this.trigger('alarm')
   this.running = false
 }

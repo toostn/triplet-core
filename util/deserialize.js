@@ -9,7 +9,7 @@ var CONSTRUCTORS = {
   Trip: require('../trip-models/trip.js')
 }
 
-module.exports = function deSerialize (key, value) {
+module.exports = function (key, value) {
   return (value !== null && value !== undefined && typeof value === 'object' &&
   '_tplType' in value &&
   value._tplType in CONSTRUCTORS)

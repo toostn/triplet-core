@@ -23,7 +23,7 @@ var beta2 = 13.0 * n * n / 48.0 - 3.0 * n * n * n / 5.0 + 557.0 * n * n * n * n 
 var beta3 = 61.0 * n * n * n / 240.0 - 103.0 * n * n * n * n / 140.0
 var beta4 = 49561.0 * n * n * n * n / 161280.0
 
-exports.fromWGS84 = function fromWGS84 (location) {
+exports.fromWGS84 = function (location) {
   var rt90 = {x: 0, y: 0}
 
   var phi = location.latitude * degToRad
@@ -54,7 +54,7 @@ exports.fromWGS84 = function fromWGS84 (location) {
   return rt90
 }
 
-exports.toWGS84 = function toWGS84 (rt90Coord) {
+exports.toWGS84 = function (rt90Coord) {
   var x = rt90Coord.X
   var y = rt90Coord.Y
 

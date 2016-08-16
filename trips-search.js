@@ -108,7 +108,7 @@ Object.defineProperty(TripsSearch.prototype, 'state', {
   }
 })
 
-TripsSearch.prototype.setTripDirty = function setTripDirty () {
+TripsSearch.prototype.setTripDirty = function () {
   var from = this.from
   var to = this.to
   if (from instanceof GeoPoint && to instanceof GeoPoint) {
@@ -124,7 +124,7 @@ TripsSearch.prototype.setTripDirty = function setTripDirty () {
 }
 
 // Manage searching
-TripsSearch.prototype.search = function search () {
+TripsSearch.prototype.search = function () {
   var query = new TripQuery(this.from, this.to, null, this.quickMode)
   this.results = null
   this.error = null
@@ -136,17 +136,17 @@ TripsSearch.prototype.search = function search () {
     .then(this._queryFinished.bind(this))
 }
 
-TripsSearch.prototype.abort = function abort () {
+TripsSearch.prototype.abort = function () {
   this._queries = []
   this.state = STATES.idle
   this._shouldGetLaterDepartures = false
 }
 
-TripsSearch.prototype.retry = function retry () {
+TripsSearch.prototype.retry = function () {
   this.setTripDirty()
 }
 
-TripsSearch.prototype.refresh = function refresh () {
+TripsSearch.prototype.refresh = function () {
   if (this._queries.length === 0 || this.error) return
   var query = this._queries[0]
   query.date = null
@@ -154,7 +154,7 @@ TripsSearch.prototype.refresh = function refresh () {
   this.apiClient.getTrips(query).then(this._queryFinished.bind(this))
 }
 
-TripsSearch.prototype.getLaterDepartures = function getLaterDepartures () {
+TripsSearch.prototype.getLaterDepartures = function () {
   if (!this.hasLaterDepartures ||
     (!this.results) ||
     (this.results.length === 0) ||
@@ -173,7 +173,7 @@ TripsSearch.prototype.getLaterDepartures = function getLaterDepartures () {
   this.apiClient.getTrips(query).then(this._queryFinished.bind(this))
 }
 
-TripsSearch.prototype._queryFinished = function _queryFinished (query) {
+TripsSearch.prototype._queryFinished = function (query) {
   var index = this._queries.indexOf(query)
   if (index === -1) return
   var finished = false
@@ -217,7 +217,7 @@ TripsSearch.prototype._queryFinished = function _queryFinished (query) {
   }
 }
 
-TripsSearch.prototype._mergeResults = function _mergeResults () {
+TripsSearch.prototype._mergeResults = function () {
   var results = []
   for (var i = 0, l = this._queries.length; i < l; i++) {
     var query = this._queries[i]

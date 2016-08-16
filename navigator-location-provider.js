@@ -1,12 +1,12 @@
 var Location = require('./trip-models/location.js')
 
-var NavigatorLocationProvider = function NavigatorLocationProvider () {
+function NavigatorLocationProvider () {
   this._watchId = undefined
 }
 
 module.exports = NavigatorLocationProvider
 
-NavigatorLocationProvider.prototype.start = function start (onLocation, onError) {
+NavigatorLocationProvider.prototype.start = function (onLocation, onError) {
   if (this._watchId !== undefined) return
 
   if (!navigator.geolocation) {
@@ -22,7 +22,7 @@ NavigatorLocationProvider.prototype.start = function start (onLocation, onError)
   )
 }
 
-NavigatorLocationProvider.prototype.stop = function stop () {
+NavigatorLocationProvider.prototype.stop = function () {
   if (this._watchId === undefined) return
 
   navigator.geolocation.clearWatch(this._watchId)
